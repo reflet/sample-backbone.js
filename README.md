@@ -28,6 +28,9 @@ $ open http://localhost:8080
 - Model - http://localhost:8080/collection1.html
 ※ CollectionでAjax通信してみる
 
+- Model - http://localhost:8080/collection2.html
+※ Collectionで任意のリストを作り操作してみる
+
 ## 参考サイト
 - [dockerでnginx導入と複数サービスの展開](https://qiita.com/asylum/items/05d8dc4cc4671d7a5d4f)
 

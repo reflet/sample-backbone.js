@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Backbone.js学習 [Collection]</title>
+</head>
+<body>
+    <h1>Collection</h1>
+    <p>Collectionで任意のリストを作り操作してみる</p>
+
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.9.1/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jquery/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/backbone@1.4.0/backbone.min.js"></script>
+    <script>
+      // Model
+      const Person = Backbone.Model.extend({
+        defaults: {
+          country: '日本',
+          prefecture: '東京',
+          name: '',
+          age: null,
+        }
+      });
+
+      // Collection
+      const Users = Backbone.Collection.extend({model: Person});
+      const users = new Users();
+      users.add({name:'次郎', age:28});
+      users.add({name:'花子', age:25, prefecture:'大阪'});
+      users.add({name:'三郎', age:32});
+      users.add({name:'田中', age:25, prefecture:'名古屋'});
+      console.log('dump1', users.toJSON());
+
+      // 名前だけ取得する
+      console.log(users.pluck('name'));
+
+      // 全件取得する
+      users.each(function(user) {
+        console.log(user.toJSON());
+      });
+
+      // 年齢が25歳のユーザーのみ取得する
+      $.each(users.where({age:25}), function(e,user) {
+        console.log(user.toJSON());
+      });
+
+      // 最後のデータ要素を削除する
+      users.pop();
+      console.log('dump2', users.toJSON());
+
+      // 指定した要素を削除する
+      users.remove(users.at(1)); // 2番目
+      console.log('dump3', users.toJSON());
+
+      //すべてのデータを削除する
+      users.reset();
+      console.log('dump4', users.toJSON());
+    </script>
+</body>
+</html>
