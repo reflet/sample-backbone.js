@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Backbone.js学習 [Model]</title>
+</head>
+<body>
+    <h1>Model</h1>
+    <p>ModelでAjax通信して動的にデータを取得する</p>
+
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.9.1/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jquery/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/backbone@1.4.0/backbone.min.js"></script>
+    <script>
+      const Person = Backbone.Model.extend({
+        urlRoot: '/api/user',
+        url: function () {
+          var url = Backbone.Model.prototype.url.apply(this);
+          return (this.isNew()) ? url : url + '.json';
+        },
+        parse: function (response) {
+          response.datetime = new Date(response.datetime);
+          return response;
+        }
+      });
+
+      var user = new Person({id: 1});
+      console.log(user.url()); // /api/user/1.json
+
+      // Ajax通信でデータを取得する
+      // ※ GET /api/user/1.json
+      user.fetch()
+        .done(function(user){
+          console.log(user);
+        });
+
+      // Ajax通信でデータを取得する
+      // ※ GET /api/user/1.json?limit=5&offset=0
+      user.fetch({data:{limit: 5, offset: 0}})
+        .done(function(user){
+          console.log(user);
+        });
+    </script>
+</body>
+</html>

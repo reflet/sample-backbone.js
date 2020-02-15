@@ -16,8 +16,11 @@ $ open http://localhost:8080
 ## サンプルコード
 作ったコードを一覧にして記載します。
 
-- TOP Page - src/html/index.html
+- TOP Page - http://localhost:8080/
 ※ とりあえず、動く環境を整える
+
+- Model - http://localhost:8080/model1.html
+※ ModelでAjax通信してみる
 
 ## 参考サイト
 - [dockerでnginx導入と複数サービスの展開](https://qiita.com/asylum/items/05d8dc4cc4671d7a5d4f)
