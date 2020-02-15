@@ -16,19 +16,19 @@ $ open http://localhost:8080
 ## サンプルコード
 作ったコードを一覧にして記載します。
 
-- TOP Page - http://localhost:8080/
+- TOP Page - http://localhost:8080/  
 ※ とりあえず、動く環境を整える
 
-- Model - http://localhost:8080/model1.html
+- Model - http://localhost:8080/model1.html  
 ※ ModelでAjax通信してみる
 
-- Model - http://localhost:8080/model2-validate.html
+- Model - http://localhost:8080/model2-validate.html  
 ※ Modelで入力検証をしてみる
 
-- Model - http://localhost:8080/collection1.html
+- Model - http://localhost:8080/collection1.html  
 ※ CollectionでAjax通信してみる
 
-- Model - http://localhost:8080/collection2.html
+- Model - http://localhost:8080/collection2.html  
 ※ Collectionで任意のリストを作り操作してみる
 
 ## 参考サイト
