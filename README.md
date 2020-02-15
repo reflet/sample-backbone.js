@@ -31,6 +31,10 @@ $ open http://localhost:8080
 - Model - http://localhost:8080/collection2.html  
 ※ Collectionで任意のリストを作り操作してみる
 
+- その他
+  - JavaScriptの継承について - http://localhost:8080/extend.html  
+  ※ JavaScriptの継承について動きを確認してみる
+
 ## 参考サイト
 - [dockerでnginx導入と複数サービスの展開](https://qiita.com/asylum/items/05d8dc4cc4671d7a5d4f)
 

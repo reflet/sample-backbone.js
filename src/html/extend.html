@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>JavaScriptの継承について</title>
+</head>
+<body>
+    <h1>prototypeを使った継承</h1>
+    <p>オブジェクトを継承してみる。</p>
+
+    <script>
+      // Animalオブジェクト
+      function Animal(name) {
+        this.name = name;
+      }
+      Animal.prototype.talk = function() {
+        console.log(this.phrase);
+      };
+
+      // Animal2オブジェクト (static変数あり)
+      var Animal2 = (function() {
+        var uid = 0;
+        return function () {
+          this.uid = uid;
+          uid++;
+        };
+      })();
+
+      // -------------------------------------------------------------------
+      // オブジェクトの継承
+
+      (function() {
+        // Dogオブジェクト (Animalを継承する)
+        function Dog(phrase) {
+          this.constructor('Dog');
+          this.phrase = phrase;
+        }
+        Dog.prototype = new Animal(); // prototype, constructorのコピー (talk関数)
+        var myDog = new Dog('Hello World.');
+        myDog.talk();            // → Hello World.
+        console.log(myDog);      // → Dog {name: "Dog", phrase: "Hello World."}
+      })();
+
+      (function() {
+        // Dog2オブジェクト (Animal2を継承する)
+        function Dog2() {
+          this.constructor();
+        }
+        Dog2.prototype = new Animal2(); // prototype, constructorのコピー (talk関数)
+        console.log('dog2(1)', new Dog2()); // dog2(1) Dog2 {uid: 4}
+        console.log('dog2(2)', new Dog2()); // dog2(2) Dog2 {uid: 5}
+        console.log('dog2(3)', new Dog2()); // dog2(3) Dog2 {uid: 6}
+      })();
+
+      // -------------------------------------------------------------------
+      // Object.createメソッド
+
+      (function() {
+        function Dog (phrase) {
+          Animal.call(this, 'Dog');
+          this.phrase = phrase;
+        }
+        Dog.prototype = Object.create(Animal.prototype);
+        Dog.prototype.constructor = Dog;
+
+        var myDog = new Dog('Hello World.');
+        myDog.talk();            // → Hello World.
+        console.log(myDog);      // → Dog {name: "Dog", phrase: "Hello World."}
+      })();
+
+      (function() {
+        // Dog2オブジェクト (Animal2を継承する)
+        function Dog2() {
+          Animal2.call(this);
+        }
+        Dog2.prototype = Object.create(Animal2.prototype);
+        Dog2.prototype.constructor = Dog2;
+
+        console.log('dog2(1)', new Dog2()); // dog2(1) Dog2 {uid: 4}
+        console.log('dog2(2)', new Dog2()); // dog2(2) Dog2 {uid: 5}
+        console.log('dog2(3)', new Dog2()); // dog2(3) Dog2 {uid: 6}
+      })();
+      // -------------------------------------------------------------------
+    </script>
+</body>
+</html>
