@@ -2,10 +2,34 @@
 <html lang="ja">
 <head>
     <meta charset="utf-8">
-    <title>Backbone.js - サンプル</title>
+    <title>Backbone.js学習</title>
 </head>
 <body>
     <h1>TOP Page</h1>
-    <p>Hello World.</p>
+    <p>ひとまず動く環境を整えてみる。</p>
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.9.1/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jquery/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/backbone@1.4.0/backbone.min.js"></script>
+    <script>
+      const Person = Backbone.Model.extend({
+        defaults: {
+          country: '日本',
+          prefecture: '東京',
+        },
+        hello: function() {
+          console.log('こんにちは、' + this.get('name') + 'さん');
+        }
+      });
+      const user = new Person({name: '太郎', age: 30});
+
+      // データ確認
+      console.log(user.toJSON()); // {country: "日本", prefecture: "東京", name: "太郎", age: 30}
+
+      // 名前を取得する
+      console.log(user.get('name'));
+
+      // 独自定義した関数を実行してみる
+      user.hello();
+    </script>
 </body>
 </html>
