@@ -22,6 +22,9 @@ $ open http://localhost:8080
 - Model - http://localhost:8080/model1.html
 ※ ModelでAjax通信してみる
 
+- Model - http://localhost:8080/model2-validate.html
+※ Modelで入力検証をしてみる
+
 ## 参考サイト
 - [dockerでnginx導入と複数サービスの展開](https://qiita.com/asylum/items/05d8dc4cc4671d7a5d4f)
 

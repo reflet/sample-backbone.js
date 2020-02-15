@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Backbone.js学習 [Model]</title>
+</head>
+<body>
+    <h1>Model - 入力検証</h1>
+    <p>モデルで入力検証をやってみる</p>
+
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.9.1/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jquery/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/backbone@1.4.0/backbone.min.js"></script>
+    <script>
+      const Person = Backbone.Model.extend({
+        initialize: function (attrs, options) {
+          console.log('initialize', attrs, options);
+        },
+        validate: function (attrs) {
+          console.log('validate', attrs);
+
+          var errors = [];
+          if (_.isEmpty(attrs.name)) {
+            errors.push({name: 'name', message: '名前が入力されていません'});
+          }
+          if (_.isEmpty(attrs.age)) {
+            errors.push({name: 'age', message: '年齢が入力されていません'});
+          }
+          return errors.length > 0 ? errors : false;
+        }
+      });
+
+      const hanako = new Person();
+      hanako
+        .bind('invalid', function (model, error) {
+          console.log('invalid', error);
+        })
+        .bind('change', function(){
+          console.log('change');
+        })
+        .bind('change:name', function(){
+          console.log("change:name");
+        });
+
+      var check = hanako.set({name: '', age: ''}, {validate: true}); // validate option required!!
+      if (check !== false) {
+        console.log('success', hanako.toJSON());
+      } else {
+        console.log('error', hanako.toJSON());
+      }
+    </script>
+</body>
+</html>
